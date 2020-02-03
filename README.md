@@ -18,3 +18,9 @@ New-TerraformFolders
 # [OPTIONAL] to get all Terraform versions run
 Get-TerraformVersion
 ```
+
+## Powershell Gallery
+
+This module is automatically published to Powershell gallery via GitHub actions from GitHub Release:
+
+<https://www.powershellgallery.com/packages/TerraformSetup>
