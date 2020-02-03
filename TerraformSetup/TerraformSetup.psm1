@@ -13,11 +13,14 @@ function Get-TerraformVersion {
     param (
         [switch]$Latest
     )
+    $originalSecurityProtocol = [Net.ServicePointManager]::SecurityProtocol
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $gitHubAPIURL = 'https://api.github.com/repos/hashicorp/terraform/releases'
     if ($Latest) {
         $gitHubAPIURL += '/latest'
     }
     (Invoke-RestMethod -Uri $gitHubAPIURL).tag_name.TrimStart('v')
+    [Net.ServicePointManager]::SecurityProtocol = $originalSecurityProtocol
 }
 
 function Install-Terraform {
@@ -40,6 +43,10 @@ function Install-Terraform {
         [string]$TerraformVersion,
         [switch]$Force
     )
+
+    $originalSecurityProtocol = [Net.ServicePointManager]::SecurityProtocol
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
     # get latest release from GitHub and download it if user don't provide the version
     if (!$TerraformVersion) {
         Write-Debug "Terraform version not set by user. Setting it to latest version found from GitHub API"
@@ -55,6 +62,7 @@ function Install-Terraform {
     if ((Test-Path $tfExePath) -and !$Force) {
         Write-Warning "Terraform is already installed to System32. Use -Force switch to bypass the check or manually remove terraform.exe. Version:"
         terraform -version
+        [Net.ServicePointManager]::SecurityProtocol = $originalSecurityProtocol
         break
     }
 
@@ -67,6 +75,7 @@ function Install-Terraform {
         catch {
             Write-Warning "$TerraformVersion is an invalid Terraform version. Please use one below:"
             Get-TerraformVersion
+            [Net.ServicePointManager]::SecurityProtocol = $originalSecurityProtocol
             break
         }
     }
@@ -79,6 +88,7 @@ function Install-Terraform {
     Write-Output "Terraform successfully installed. Version:"
     # test terraform
     terraform -version
+    [Net.ServicePointManager]::SecurityProtocol = $originalSecurityProtocol
 }
 
 function New-TerraformFolders {
@@ -104,4 +114,24 @@ function New-TerraformFolders {
 
     # create terraform module and template folders under C:\Terraform
     $tfWindowsTemplatePath, $tfLinuxTemplatePath, $tfModulePath | ForEach-Object { New-Item $_ -ItemType Directory -ErrorAction SilentlyContinue }
+}
+
+function Uninstall-Terraform {
+    <#
+    .SYNOPSIS
+        Uninstall Terraform
+    .DESCRIPTION
+        Removes terrafom.exe under system32
+    .EXAMPLE
+        Uninstall-Terraform
+    #>
+    $tfInstallPath = Join-Path $env:SystemRoot 'System32'
+    $tfExePath = Join-Path $tfInstallPath 'terraform.exe'
+    if (Test-Path $tfExePath) {
+        Remove-Item $tfExePath
+        Write-Output "terraform.exe removed"
+    }
+    else {
+        Write-Warning "No terraform.exe found under system32"
+    }
 }

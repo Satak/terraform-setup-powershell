@@ -17,6 +17,9 @@ New-TerraformFolders
 
 # [OPTIONAL] to get all Terraform versions run
 Get-TerraformVersion
+
+# Uninstall terraform
+Uninstall-Terraform
 ```
 
 ## Powershell Gallery
