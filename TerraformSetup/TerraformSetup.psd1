@@ -95,19 +95,19 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags         = @("Terraform", "IaC")
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/Satak/terraform-setup-powershell/blob/master/LICENSE'
+            LicenseUri   = 'https://github.com/Satak/terraform-setup-powershell/blob/master/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/Satak/terraform-setup-powershell'
+            ProjectUri   = 'https://github.com/Satak/terraform-setup-powershell'
 
             # A URL to an icon representing this module.
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'Terraform binary installer for Windows'
 
             # Prerelease string of this module
             # Prerelease = ''
