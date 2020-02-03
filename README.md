@@ -1,5 +1,7 @@
 # Terraform Install and Setup module for Powershell
 
+![Publish](https://github.com/Satak/terraform-setup-powershell/workflows/Publish/badge.svg)
+
 Automate your Windows Terraform installation process.
 
 ## Usage
