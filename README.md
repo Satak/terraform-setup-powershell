@@ -1,2 +1,3 @@
-# terraform-install-powershell
-Terraform installation module for Powershell
+# Terraform Install and Setup module for Powershell
+
+Automate your Windows Terraform installation process
