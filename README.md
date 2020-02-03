@@ -1,6 +1,6 @@
 # Terraform Install and Setup module for Powershell
 
-![Publish](https://github.com/Satak/terraform-setup-powershell/workflows/Publish/badge.svg)
+![Publish](https://github.com/Satak/terraform-setup-powershell/workflows/Publish/badge.svg?branch=master)
 
 Automate your Windows Terraform installation process.
 
@@ -18,3 +18,9 @@ New-TerraformFolders
 # [OPTIONAL] to get all Terraform versions run
 Get-TerraformVersion
 ```
+
+## Powershell Gallery
+
+This module is automatically published to Powershell gallery via GitHub actions from GitHub Release:
+
+<https://www.powershellgallery.com/packages/TerraformSetup>
