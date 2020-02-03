@@ -30,7 +30,7 @@
     Copyright             = '(c) Satak. All rights reserved.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description           = 'Setup and install Terraform for Windows'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
