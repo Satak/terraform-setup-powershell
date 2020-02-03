@@ -9,28 +9,28 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule            = 'TerraformSetup.psm1'
+    RootModule        = 'TerraformSetup.psm1'
 
     # Version number of this module.
-    ModuleVersion         = '0.0.2'
+    ModuleVersion     = '0.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
 
     # ID used to uniquely identify this module
-    GUID                  = '307d23fb-47df-4649-a1d6-82bc184c60d0'
+    GUID              = '307d23fb-47df-4649-a1d6-82bc184c60d0'
 
     # Author of this module
-    Author                = 'Satak'
+    Author            = 'Satak'
 
     # Company or vendor of this module
-    CompanyName           = 'Fujitsu'
+    CompanyName       = 'Fujitsu'
 
     # Copyright statement for this module
-    Copyright             = '(c) Satak. All rights reserved.'
+    Copyright         = '(c) Satak. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description           = 'Setup and install Terraform for Windows'
+    Description       = 'Setup and install Terraform for Windows'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
@@ -48,7 +48,7 @@
     # CLRVersion = ''
 
     # Processor architecture (None, X86, Amd64) required by this module
-    ProcessorArchitecture = 'Amd64'
+    # ProcessorArchitecture = 'Amd64'
 
     # Modules that must be imported into the global environment prior to importing this module
     # RequiredModules = @()
@@ -69,20 +69,20 @@
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport     = @(
+    FunctionsToExport = @(
         'Get-TerraformVersion',
         'Install-Terraform',
         'New-TerraformFolders'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport       = '*'
+    CmdletsToExport   = '*'
 
     # Variables to export from this module
-    VariablesToExport     = '*'
+    VariablesToExport = '*'
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport       = '*'
+    AliasesToExport   = '*'
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
@@ -94,7 +94,7 @@
     # FileList = @()
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-    PrivateData           = @{
+    PrivateData       = @{
 
         PSData = @{
 
