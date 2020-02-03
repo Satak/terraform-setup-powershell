@@ -6,12 +6,18 @@ function Get-TerraformVersion {
         Get all Terraform versions from Github API
     .EXAMPLE
         Get-TerraformVersion
+    .PARAMETER Latest
+        Get only the latest release
     #>
     [CmdletBinding()]
-    param ()
-    $allTerraformRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/hashicorp/terraform/releases'
-    $allTerraformReleaseVersions = $allTerraformRelease.tag_name | ForEach-Object { $_.TrimStart('v') }
-    $allTerraformReleaseVersions
+    param (
+        [switch]$Latest
+    )
+    $gitHubAPIURL = 'https://api.github.com/repos/hashicorp/terraform/releases'
+    if ($Latest) {
+        $gitHubAPIURL += '/latest'
+    }
+    (Invoke-RestMethod -Uri $gitHubAPIURL).tag_name.TrimStart('v')
 }
 
 function Install-Terraform {
@@ -37,8 +43,7 @@ function Install-Terraform {
     # get latest release from GitHub and download it if user don't provide the version
     if (!$TerraformVersion) {
         Write-Debug "Terraform version not set by user. Setting it to latest version found from GitHub API"
-        $githubLatestAPIURL = 'https://api.github.com/repos/hashicorp/terraform/releases/latest'
-        $TerraformVersion = (Invoke-RestMethod -Uri $githubLatestAPIURL | Select-Object -ExpandProperty 'tag_name').TrimStart('v')
+        $TerraformVersion = Get-TerraformVersion -Latest
         Write-Output "Latest Terraform version found from GitHub API: $TerraformVersion"
     }
     $tfInstallPath = Join-Path $env:SystemRoot 'System32'
@@ -60,10 +65,8 @@ function Install-Terraform {
             Invoke-WebRequest $tfURL -OutFile $tfZipFilePath -ErrorAction Stop 
         }
         catch {
-            $allTerraformRelease = Invoke-RestMethod -Uri 'https://api.github.com/repos/hashicorp/terraform/releases'
-            $allTerraformReleaseVersions = $allTerraformRelease.tag_name | ForEach-Object { $_.TrimStart('v') }
             Write-Warning "$TerraformVersion is an invalid Terraform version. Please use one below:"
-            $allTerraformReleaseVersions
+            Get-TerraformVersion
             break
         }
     }
